@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.poisonvenom.spawnermask.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "spawner-mask",
+  "version": "1.0.0",
+  "name": "SpawnerMask",
+  "description": "Trouser-Streak is a compilation of modules, updated to the latest version and optimized for maximum grief. I did not make all of these.",
+  "authors": [
+    "poisonvenom"
+  ],
+  "contact": {
+    "repo": "https://github.com/etianl/Trouser-Streak/"
+  },
+  "icon": "assets/icon/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "net.poisonvenom.spawnermask.SpawnerMask"
+    ]
+  },
+  "accessWidener": "spawnermask.accesswidener",
+  "mixins": [
+    "spawnermask.mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "255,25,25"
+  },
+  "depends": {
+    "java": ">=21",
+    "minecraft": ">=${mc_version}",
+    "meteor-client": "*"
+  }
+}
