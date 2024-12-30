@@ -3,12 +3,12 @@
   "id": "spawner-mask",
   "version": "1.0.0",
   "name": "SpawnerMask",
-  "description": "Trouser-Streak is a compilation of modules, updated to the latest version and optimized for maximum grief. I did not make all of these.",
+  "description": "Mod to hide a spawner and make it appear as if no one has visited it.",
   "authors": [
     "poisonvenom"
   ],
   "contact": {
-    "repo": "https://github.com/etianl/Trouser-Streak/"
+    "repo": "https://github.com/poisonvenom"
   },
   "icon": "assets/icon/icon.png",
   "environment": "client",
