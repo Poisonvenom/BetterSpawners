@@ -45,7 +45,7 @@ public class MaskSpawner extends Module {
                 keyPressed = true;
             }
         }
-        if (concealed && distance2Player(spwnr) > 17 && keyPressed) {
+        if (concealed && distance2Player(spwnr) > 16 && keyPressed) {
             mc.options.backKey.setPressed(false);
             keyPressed = false;
         }
