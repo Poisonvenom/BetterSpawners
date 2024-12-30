@@ -35,7 +35,7 @@ public class MaskSpawner extends Module {
 
     @EventHandler
     private void onPreTick(TickEvent.Pre event) {
-        if (spwnr != null && distance2Player(spwnr) < 17 && !concealed){
+        if (spwnr != null && distance2Player(spwnr) < 16 && !concealed){
             int delay = spwnr.getLogic().spawnDelay;
             ChatUtils.sendMsg(Text.of("Spawner delay: " + delay));
             if (delay == 20) {
