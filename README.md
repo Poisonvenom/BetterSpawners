@@ -19,5 +19,5 @@ Usage/Tutorial:
  3. You want your client to be as far away from the spawner as possible while still in the 16 block range. The means the absolute INSTANT the delay shown on the screen starts CHANGING do not move forward any further. If you are too far forward the module will over shoot and won't work.
 
  4. Sometimes the spawner will unmask when the client relogs nearby. If this happens move further away or unload the chunks completely and the spawner should stay masked.
- 5. The spawner delay can roll over and read all 0's. This is normal and if it happens, stay in range of the spawner until it rolls back to the 300's and then mask the spawner regularly.
+ 5. The spawner delay can roll over and read all 0's. This is normal and if it happens, stay in range of the spawner until it rolls back to the 200's and then mask the spawner normally.
 
