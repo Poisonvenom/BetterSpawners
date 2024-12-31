@@ -22,6 +22,9 @@ Usage/Tutorial:
  5. The spawner delay can roll over and read all 0's. This is normal and if it happens, stay in range of the spawner until it rolls back to the 200's and then mask the spawner normally.
 
 Links:
--Video Guide: https://youtu.be/Ok1qjzW8cVI
--Troll video: 
--Outlast discord: discord.gg/yodiegang
+
+Video Guide: https://youtu.be/Ok1qjzW8cVI
+
+Troll video: 
+
+Outlast discord: discord.gg/yodiegang
