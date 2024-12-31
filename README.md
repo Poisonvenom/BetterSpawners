@@ -21,5 +21,7 @@ Usage/Tutorial:
  4. Sometimes the spawner will unmask when the client relogs nearby. If this happens move further away or unload the chunks completely and the spawner should stay masked.
  5. The spawner delay can roll over and read all 0's. This is normal and if it happens, stay in range of the spawner until it rolls back to the 200's and then mask the spawner normally.
 
-Video Guide:
-https://youtu.be/Ok1qjzW8cVI
+Links:
+Video Guide: https://youtu.be/Ok1qjzW8cVI
+Troll video: 
+Outlast discord: discord.gg/yodiegang
