@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import net.poisonvenom.spawnermask.modules.*;
 
 
-public class SpawnerMask extends MeteorAddon {
-        public static final Logger LOG = LoggerFactory.getLogger(SpawnerMask.class);
-        public static final Category Main = new Category("SpawnerMask");
+public class BetterSpawners extends MeteorAddon {
+        public static final Logger LOG = LoggerFactory.getLogger(BetterSpawners.class);
+        public static final Category Main = new Category("BetterSpawners");
         @Override
         public void onInitialize() {
                 Modules.get().add(new ActivatedSpawnerDetector());

@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.chunk.WorldChunk;
-import net.poisonvenom.spawnermask.SpawnerMask;
+import net.poisonvenom.spawnermask.BetterSpawners;
 
 import java.util.*;
 
@@ -20,7 +20,7 @@ public class MaskSpawner extends Module {
     private boolean keyPressed = false;
 
     public MaskSpawner() {
-        super(SpawnerMask.Main,"MaskSpawner", "Masks spawners that have been activated.");
+        super(BetterSpawners.Main,"SpawnerMask", "Masks spawners that have been activated.");
     }
     @Override
     public void onActivate() {

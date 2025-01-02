@@ -20,7 +20,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
-import net.poisonvenom.spawnermask.SpawnerMask;
+import net.poisonvenom.spawnermask.BetterSpawners;
 
 import java.util.*;
 
@@ -135,7 +135,7 @@ public class ActivatedSpawnerDetector extends Module {
     private final Set<BlockPos> deactivatedSpawnerPositions = Collections.synchronizedSet(new HashSet<>());
 
     public ActivatedSpawnerDetector() {
-        super(SpawnerMask.Main,"ActivatedSpawnerDetector", "Detects if a player has been near a mob spawner in the past. May be useful for finding player made stashes in dungeons, mineshafts, and other places.");
+        super(BetterSpawners.Main,"ActivatedSpawnerDetector", "Detects if a player has been near a mob spawner in the past. May be useful for finding player made stashes in dungeons, mineshafts, and other places.");
     }
     @Override
     public void onActivate() {

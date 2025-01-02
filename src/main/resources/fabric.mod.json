@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "id": "spawner-mask",
-  "version": "1.0.0",
-  "name": "SpawnerMask",
+  "version": "1.0.1",
+  "name": "Better Spawners",
   "description": "Mod to hide a spawner and make it appear as if no one has visited it.",
   "authors": [
     "poisonvenom"
@@ -14,7 +14,7 @@
   "environment": "client",
   "entrypoints": {
     "meteor": [
-      "net.poisonvenom.spawnermask.SpawnerMask"
+      "net.poisonvenom.spawnermask.BetterSpawners"
     ]
   },
   "accessWidener": "spawnermask.accesswidener",
