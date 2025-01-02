@@ -1,8 +1,8 @@
-SpawnerMask is an Meteor client addon that bypasses spawner detection exploits by making the spawner appear natural.
-This mod includes two modules: ActivatedSpawnerDetector and MaskSpawner.
+BetterSpawners is an Meteor client addon that bypasses spawner detection exploits by making the spawner appear natural.
+This mod includes two modules: ActivatedSpawnerDetector and SpawnerMask.
 The ActivatedSpawnerDetector module is included for convenience as the two modules are often paired together. ActivatedSpawnerDetector was created by Etianl and I claim no credit. Special thanks to Nigerianprince and NewHag.
 
-Usage/Tutorial:
+SpawnerMask Usage/Tutorial:
 1. Locate the spawner you wish to mask.
 2. Make all desired edits to the spawner including hiding any desired items.
 3. Move outside the edge of the spawner dectection radius. This is roughly 17 blocks away from the spawner. You can use the ActivatedSpawnerDectector as a guide as it draws a 16x16x16 box around the spawner.
