@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "spawner-mask",
-  "version": "1.0.1",
+  "id": "better-spawners",
+  "version": "1.0.2",
   "name": "Better Spawners",
   "description": "Mod to hide a spawner and make it appear as if no one has visited it.",
   "authors": [
