@@ -25,6 +25,6 @@ Links:
 
 Video Guide: https://youtu.be/Ok1qjzW8cVI
 
-Troll video: 
+Troll video: https://www.youtube.com/watch?v=vQkeRHzmp5Y&t=1s
 
 Outlast discord: https://discord.gg/yodiegang
