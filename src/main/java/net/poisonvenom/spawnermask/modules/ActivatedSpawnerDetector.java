@@ -306,9 +306,8 @@ public class ActivatedSpawnerDetector extends Module {
                 List<BlockEntity> blockEntities = new ArrayList<>(chunk.getBlockEntities().values());
 
                 for (BlockEntity blockEntity : blockEntities) {
-                    if (blockEntity instanceof MobSpawnerBlockEntity){
+                    if (blockEntity instanceof MobSpawnerBlockEntity spawner){
                         activatedSpawnerFound = false;
-                        MobSpawnerBlockEntity spawner = (MobSpawnerBlockEntity) blockEntity;
                         BlockPos pos = spawner.getPos();
                         BlockPos playerPos = new BlockPos(mc.player.getBlockX(), pos.getY(), mc.player.getBlockZ());
                         String monster = null;
@@ -393,7 +392,7 @@ public class ActivatedSpawnerDetector extends Module {
                                     }
                                 }
                             }
-                            if (activatedSpawnerFound == true) {
+                            if (activatedSpawnerFound) {
                                 if (deactivatedSpawner.get()){
                                     boolean lightsFound = false;
                                     for (int x = -deactivatedSpawnerdistance.get(); x < deactivatedSpawnerdistance.get()+1; x++) {
@@ -408,7 +407,7 @@ public class ActivatedSpawnerDetector extends Module {
                                             }
                                         }
                                     }
-                                    if (chatFeedback.get() && lightsFound == true) ChatUtils.sendMsg(Text.of("The Spawner has torches or other light blocks!"));
+                                    if (chatFeedback.get() && lightsFound) ChatUtils.sendMsg(Text.of("The Spawner has torches or other light blocks!"));
                                 }
 
                                 boolean chestfound = false;
@@ -441,8 +440,7 @@ public class ActivatedSpawnerDetector extends Module {
                             }
                         }
                     }
-                    if (blockEntity instanceof TrialSpawnerBlockEntity){
-                        TrialSpawnerBlockEntity trialspawner = (TrialSpawnerBlockEntity) blockEntity;
+                    if (blockEntity instanceof TrialSpawnerBlockEntity trialspawner){
                         BlockPos tPos = trialspawner.getPos();
                         BlockPos playerPos = new BlockPos(mc.player.getBlockX(), tPos.getY(), mc.player.getBlockZ());
                         if (playerPos.isWithinDistance(tPos, renderDistance.get() * 16) && trialSpawner.get() && !trialspawnerPositions.contains(tPos) && !noRenderPositions.contains(tPos) && !deactivatedSpawnerPositions.contains(tPos) && !spawnerPositions.contains(tPos) && trialspawner.getSpawnerState() != TrialSpawnerState.WAITING_FOR_PLAYERS) {
