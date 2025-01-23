@@ -14,12 +14,12 @@
   "environment": "client",
   "entrypoints": {
     "meteor": [
-      "net.poisonvenom.spawnermask.BetterSpawners"
+      "net.poisonvenom.betterspawners.BetterSpawners"
     ]
   },
-  "accessWidener": "spawnermask.accesswidener",
+  "accessWidener": "betterspawners.accesswidener",
   "mixins": [
-    "spawnermask.mixins.json"
+    "betterspawners.mixins.json"
   ],
   "custom": {
     "meteor-client:color": "255,25,25"

@@ -1,5 +1,5 @@
 //made by etianl :D
-package net.poisonvenom.spawnermask.modules;
+package net.poisonvenom.betterspawners.modules;
 
 import meteordevelopment.meteorclient.events.game.GameLeftEvent;
 import meteordevelopment.meteorclient.events.game.OpenScreenEvent;
@@ -20,7 +20,6 @@ import net.minecraft.block.entity.TrialSpawnerBlockEntity;
 import net.minecraft.block.enums.TrialSpawnerState;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.ChestMinecartEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +28,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
-import net.poisonvenom.spawnermask.BetterSpawners;
+import net.poisonvenom.betterspawners.BetterSpawners;
 
 import java.util.*;
 

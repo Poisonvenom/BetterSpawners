@@ -1,4 +1,4 @@
-package net.poisonvenom.spawnermask.modules;
+package net.poisonvenom.betterspawners.modules;
 
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.systems.modules.Module;
@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.chunk.WorldChunk;
-import net.poisonvenom.spawnermask.BetterSpawners;
+import net.poisonvenom.betterspawners.BetterSpawners;
 
 import java.util.*;
 

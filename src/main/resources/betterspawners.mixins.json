@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.poisonvenom.spawnermask.mixin",
+  "package": "net.poisonvenom.betterspawners.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
   ],
