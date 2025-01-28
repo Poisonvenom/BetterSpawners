@@ -15,6 +15,7 @@ public class BetterSpawners extends MeteorAddon {
         public void onInitialize() {
                 Modules.get().add(new ActivatedSpawnerDetector());
                 Modules.get().add(new MaskSpawner());
+                Modules.get().add(new CaveDisturbanceDetector());
         }
 
         @Override
