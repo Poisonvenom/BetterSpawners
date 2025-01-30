@@ -24,28 +24,6 @@ import net.poisonvenom.betterspawners.BetterSpawners;
 import java.util.*;
 
 public class MaskSpawner extends Module {
-    private final SettingGroup sgRender = settings.createGroup("Render");
-    private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
-            .name("shape-mode")
-            .description("How the shapes are rendered.")
-            .defaultValue(ShapeMode.Both)
-            .build()
-    );
-    private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
-            .name("nearest-spawner-side-color")
-            .description("Color of the nearest spawner found.")
-            .defaultValue(new SettingColor(255, 0, 130, 55))
-            .visible(() -> (shapeMode.get() == ShapeMode.Sides || shapeMode.get() == ShapeMode.Both))
-            .build()
-    );
-    private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
-            .name("nearest-spawner-line-color")
-            .description("Color of the nearest spawner found.")
-            .defaultValue(new SettingColor(255, 0, 130, 200))
-            .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
-            .build()
-    );
-
     private MobSpawnerBlockEntity spwnr = null;
     private boolean concealed = false;
     private boolean keyPressed = false;
@@ -54,11 +32,17 @@ public class MaskSpawner extends Module {
         super(BetterSpawners.Main, "SpawnerMask", "Masks spawners that have been activated.");
     }
 
+    /**
+     * Locates spawner in world.
+     */
     @Override
     public void onActivate() {
         setSpawner();
     }
 
+    /**
+     * Resets globals and releases nearest spawner.
+     */
     @Override
     public void onDeactivate() {
         spwnr = null;
@@ -66,6 +50,11 @@ public class MaskSpawner extends Module {
         keyPressed = false;
     }
 
+    /**
+     * Detects the spawner delay every tick and displays in the chat when in range.
+     *
+     * @param event pre tick
+     */
     @EventHandler
     private void onPreTick(TickEvent.Pre event) {
         if (spwnr != null && distance2Player(spwnr) < 16 && !concealed) {
@@ -84,15 +73,9 @@ public class MaskSpawner extends Module {
         }
     }
 
-    @EventHandler
-    private void onRender(Render3DEvent event) {
-        render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() + 1), new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY(), spwnr.getPos().getZ())), sideColor.get(), lineColor.get(), shapeMode.get(), event);
-    }
-
-    private void render(Box box, Color sides, Color lines, ShapeMode shapemode, Render3DEvent event) {
-        event.renderer.box(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, sides, lines, shapemode, 0);
-    }
-
+    /**
+     * Locates the nearest spawner in the world to the player upon activation.
+     */
     private void setSpawner() {
         if (mc.world == null) return;
         if (mc.player == null) return;
@@ -120,6 +103,12 @@ public class MaskSpawner extends Module {
         ChatUtils.sendMsg(Text.of("Located nearest spawner."));
     }
 
+    /**
+     * Helper method to calculate distance.
+     *
+     * @param spawner the spawner
+     * @return distance double
+     */
     private double distance2Player(MobSpawnerBlockEntity spawner) {
         if (mc.player != null) {
             return mc.player.getPos().distanceTo(new Vec3d(spawner.getPos().getX(), spawner.getPos().getY(), spawner.getPos().getZ()));
@@ -127,4 +116,45 @@ public class MaskSpawner extends Module {
             return 0.0;
         }
     }
+
+    //rendering
+    @EventHandler
+    private void onRender(Render3DEvent event) {
+        if (spwnr == null) {
+            return;
+        }
+        render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() + 1),
+                new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY(), spwnr.getPos().getZ())), sideColor.get(), lineColor.get(), shapeMode.get(), event);
+
+        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 2 , spwnr.getPos().getZ() - 16),
+                new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15)), sideColor.get(), lineColor.get(), shapeMode.get(), event);
+
+    }
+
+    private void render(Box box, Color sides, Color lines, ShapeMode shapemode, Render3DEvent event) {
+        event.renderer.box(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, sides, lines, shapemode, 0);
+    }
+
+    //settings
+    private final SettingGroup sgRender = settings.createGroup("Render");
+    private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
+            .name("shape-mode")
+            .description("How the shapes are rendered.")
+            .defaultValue(ShapeMode.Both)
+            .build()
+    );
+    private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
+            .name("nearest-spawner-side-color")
+            .description("Color of the nearest spawner found.")
+            .defaultValue(new SettingColor(255, 0, 130, 55))
+            .visible(() -> (shapeMode.get() == ShapeMode.Sides || shapeMode.get() == ShapeMode.Both))
+            .build()
+    );
+    private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
+            .name("nearest-spawner-line-color")
+            .description("Color of the nearest spawner found.")
+            .defaultValue(new SettingColor(255, 0, 130, 200))
+            .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
+            .build()
+    );
 }
