@@ -126,9 +126,14 @@ public class MaskSpawner extends Module {
         render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() + 1),
                 new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY(), spwnr.getPos().getZ())), sideColor.get(), lineColor.get(), shapeMode.get(), event);
 
-        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 2 , spwnr.getPos().getZ() - 16),
-                new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15)), sideColor.get(), lineColor.get(), shapeMode.get(), event);
+        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1 , spwnr.getPos().getZ() - 16),
+                new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.4)), sideColor2.get(), lineColor2.get(), shapeMode.get(), event);
 
+        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1 , spwnr.getPos().getZ() - 15.4),
+                new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
+
+        render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() - 15.4),
+                new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.35)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
     }
 
     private void render(Box box, Color sides, Color lines, ShapeMode shapemode, Render3DEvent event) {
@@ -136,7 +141,7 @@ public class MaskSpawner extends Module {
     }
 
     //settings
-    private final SettingGroup sgRender = settings.createGroup("Render");
+    private final SettingGroup sgRender = settings.createGroup("Render Settings");
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
             .name("shape-mode")
             .description("How the shapes are rendered.")
@@ -146,14 +151,44 @@ public class MaskSpawner extends Module {
     private final Setting<SettingColor> sideColor = sgRender.add(new ColorSetting.Builder()
             .name("nearest-spawner-side-color")
             .description("Color of the nearest spawner found.")
-            .defaultValue(new SettingColor(255, 0, 130, 55))
+            .defaultValue(new SettingColor(251, 5, 5, 55))
             .visible(() -> (shapeMode.get() == ShapeMode.Sides || shapeMode.get() == ShapeMode.Both))
             .build()
     );
     private final Setting<SettingColor> lineColor = sgRender.add(new ColorSetting.Builder()
             .name("nearest-spawner-line-color")
             .description("Color of the nearest spawner found.")
-            .defaultValue(new SettingColor(255, 0, 130, 200))
+            .defaultValue(new SettingColor(251, 5, 5, 200))
+            .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
+            .build()
+    );
+
+    private final Setting<SettingColor> sideColor2 = sgRender.add(new ColorSetting.Builder()
+            .name("nearest-spawner-side-color")
+            .description("Color of the nearest spawner found.")
+            .defaultValue(new SettingColor(55, 255, 5, 55))
+            .visible(() -> (shapeMode.get() == ShapeMode.Sides || shapeMode.get() == ShapeMode.Both))
+            .build()
+    );
+    private final Setting<SettingColor> lineColor2 = sgRender.add(new ColorSetting.Builder()
+            .name("nearest-spawner-line-color")
+            .description("Color of the nearest spawner found.")
+            .defaultValue(new SettingColor(55, 255, 5, 200))
+            .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
+            .build()
+    );
+
+    private final Setting<SettingColor> sideColor3 = sgRender.add(new ColorSetting.Builder()
+            .name("nearest-spawner-side-color")
+            .description("Color of the nearest spawner found.")
+            .defaultValue(new SettingColor(55, 5, 255, 55))
+            .visible(() -> (shapeMode.get() == ShapeMode.Sides || shapeMode.get() == ShapeMode.Both))
+            .build()
+    );
+    private final Setting<SettingColor> lineColor3 = sgRender.add(new ColorSetting.Builder()
+            .name("nearest-spawner-line-color")
+            .description("Color of the nearest spawner found.")
+            .defaultValue(new SettingColor(55, 5, 255, 200))
             .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
             .build()
     );
