@@ -26,7 +26,7 @@ import java.util.*;
 public class MaskSpawner extends Module {
     private MobSpawnerBlockEntity spwnr = null;
     private boolean concealed = false;
-    private boolean keyPressed = false;
+    private boolean sKeyPressed = false;
 
     public MaskSpawner() {
         super(BetterSpawners.Main, "SpawnerMask", "Masks spawners that have been activated.");
@@ -47,7 +47,7 @@ public class MaskSpawner extends Module {
     public void onDeactivate() {
         spwnr = null;
         concealed = false;
-        keyPressed = false;
+        sKeyPressed = false;
     }
 
     /**
@@ -62,14 +62,14 @@ public class MaskSpawner extends Module {
             ChatUtils.sendMsg(Text.of("Spawner delay: " + delay));
             if (delay == 20) {
                 mc.options.backKey.setPressed(true);
-                ChatUtils.sendMsg(Text.of("Final delay: " + delay));
+                ChatUtils.sendMsg(Text.of("Final delay: " + delay + ". It is recommended to unload the chunks and reload them as a sanity check."));
                 concealed = true;
-                keyPressed = true;
+                sKeyPressed = true;
             }
         }
-        if (concealed && distance2Player(spwnr) > 16 && keyPressed) {
+        if (concealed && distance2Player(spwnr) > 16 && sKeyPressed) {
             mc.options.backKey.setPressed(false);
-            keyPressed = false;
+            sKeyPressed = false;
         }
     }
 
@@ -123,15 +123,19 @@ public class MaskSpawner extends Module {
         if (spwnr == null) {
             return;
         }
+        //selected spawner
         render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() + 1),
                 new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY(), spwnr.getPos().getZ())), sideColor.get(), lineColor.get(), shapeMode.get(), event);
 
-        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1 , spwnr.getPos().getZ() - 16),
+        //green floor
+        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1, spwnr.getPos().getZ() - 16),
                 new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.4)), sideColor2.get(), lineColor2.get(), shapeMode.get(), event);
 
-        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1 , spwnr.getPos().getZ() - 15.4),
+        //blue floor
+        render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1, spwnr.getPos().getZ() - 15.4),
                 new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
 
+        //blue screen
         render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() - 15.4),
                 new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.35)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
     }
@@ -164,30 +168,30 @@ public class MaskSpawner extends Module {
     );
 
     private final Setting<SettingColor> sideColor2 = sgRender.add(new ColorSetting.Builder()
-            .name("nearest-spawner-side-color")
-            .description("Color of the nearest spawner found.")
+            .name("floor-mat-1-side-color")
+            .description("Color of the floor mat half furthest away from the spawner.")
             .defaultValue(new SettingColor(55, 255, 5, 55))
             .visible(() -> (shapeMode.get() == ShapeMode.Sides || shapeMode.get() == ShapeMode.Both))
             .build()
     );
     private final Setting<SettingColor> lineColor2 = sgRender.add(new ColorSetting.Builder()
-            .name("nearest-spawner-line-color")
-            .description("Color of the nearest spawner found.")
+            .name("floor-mat-1-line-color")
+            .description("Color of the floor mat half furthest away from the spawner.")
             .defaultValue(new SettingColor(55, 255, 5, 200))
             .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
             .build()
     );
 
     private final Setting<SettingColor> sideColor3 = sgRender.add(new ColorSetting.Builder()
-            .name("nearest-spawner-side-color")
-            .description("Color of the nearest spawner found.")
+            .name("floor-mat-2-side-color")
+            .description("Color of the floor mat half closest to the spawner.")
             .defaultValue(new SettingColor(55, 5, 255, 55))
             .visible(() -> (shapeMode.get() == ShapeMode.Sides || shapeMode.get() == ShapeMode.Both))
             .build()
     );
     private final Setting<SettingColor> lineColor3 = sgRender.add(new ColorSetting.Builder()
-            .name("nearest-spawner-line-color")
-            .description("Color of the nearest spawner found.")
+            .name("floor-mat-2-line-color")
+            .description("Color of the floor mat half closest to the spawner.")
             .defaultValue(new SettingColor(55, 5, 255, 200))
             .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
             .build()
