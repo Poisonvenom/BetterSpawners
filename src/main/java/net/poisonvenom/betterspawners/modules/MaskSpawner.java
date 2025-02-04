@@ -60,6 +60,9 @@ public class MaskSpawner extends Module {
         if (spwnr != null && distance2Player(spwnr) < 16 && !concealed) {
             int delay = spwnr.getLogic().spawnDelay;
             ChatUtils.sendMsg(Text.of("Spawner delay: " + delay));
+            mc.player.setYaw(0);
+            mc.player.headYaw = 0;
+            mc.player.bodyYaw = 0;
             if (delay == 20) {
                 mc.options.backKey.setPressed(true);
                 ChatUtils.sendMsg(Text.of("Final delay: " + delay + ". It is recommended to unload the chunks and reload them as a sanity check."));
