@@ -3,10 +3,7 @@ package net.poisonvenom.betterspawners.modules;
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.renderer.ShapeMode;
-import meteordevelopment.meteorclient.settings.ColorSetting;
-import meteordevelopment.meteorclient.settings.EnumSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
+import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.player.ChatUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
@@ -29,7 +26,7 @@ public class MaskSpawner extends Module {
     private boolean sKeyPressed = false;
 
     public MaskSpawner() {
-        super(BetterSpawners.Main, "SpawnerMask", "Masks spawners that have been activated.");
+        super(BetterSpawners.Main, "SpawnerMask", "Masks spawners to make them appear as if no one has visited.");
     }
 
     /**
@@ -60,9 +57,13 @@ public class MaskSpawner extends Module {
         if (spwnr != null && distance2Player(spwnr) < 16 && !concealed) {
             int delay = spwnr.getLogic().spawnDelay;
             ChatUtils.sendMsg(Text.of("Spawner delay: " + delay));
-            mc.player.setYaw(0);
-            mc.player.headYaw = 0;
-            mc.player.bodyYaw = 0;
+
+            if (rotationLock.get()) {
+                mc.player.setYaw(0);
+                mc.player.headYaw = 0;
+                mc.player.bodyYaw = 0;
+            }
+
             if (delay == 20) {
                 mc.options.backKey.setPressed(true);
                 ChatUtils.sendMsg(Text.of("Final delay: " + delay + ". It is recommended to unload the chunks and reload them as a sanity check."));
@@ -130,17 +131,19 @@ public class MaskSpawner extends Module {
         render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() + 1),
                 new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY(), spwnr.getPos().getZ())), sideColor.get(), lineColor.get(), shapeMode.get(), event);
 
-        //green floor
+        //green floor mat
         render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1, spwnr.getPos().getZ() - 16),
                 new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.4)), sideColor2.get(), lineColor2.get(), shapeMode.get(), event);
 
-        //blue floor
+        //blue floor mat
         render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1, spwnr.getPos().getZ() - 15.4),
                 new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
 
-        //blue screen
-        render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() - 15.4),
-                new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.35)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
+        //blue face screen
+        if (faceShield.get()) {
+            render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() - 15.4),
+                    new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.35)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
+        }
     }
 
     private void render(Box box, Color sides, Color lines, ShapeMode shapemode, Render3DEvent event) {
@@ -149,6 +152,8 @@ public class MaskSpawner extends Module {
 
     //settings
     private final SettingGroup sgRender = settings.createGroup("Render Settings");
+    private final SettingGroup sgGeneral = settings.createGroup("General");
+
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
             .name("shape-mode")
             .description("How the shapes are rendered.")
@@ -197,6 +202,18 @@ public class MaskSpawner extends Module {
             .description("Color of the floor mat half closest to the spawner.")
             .defaultValue(new SettingColor(55, 5, 255, 200))
             .visible(() -> (shapeMode.get() == ShapeMode.Lines || shapeMode.get() == ShapeMode.Both))
+            .build()
+    );
+    private final Setting<Boolean> faceShield = sgRender.add(new BoolSetting.Builder()
+            .name("Face Shield")
+            .description("Renders a rectangular wall at the boundary of the spawner radius.")
+            .defaultValue(true)
+            .build()
+    );
+    private final Setting<Boolean> rotationLock = sgGeneral.add(new BoolSetting.Builder()
+            .name("Rotation Lock")
+            .description("Locks the player's yaw when standing on the floor mat.")
+            .defaultValue(true)
             .build()
     );
 }
