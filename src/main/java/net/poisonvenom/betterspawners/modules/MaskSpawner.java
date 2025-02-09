@@ -12,7 +12,6 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
@@ -122,6 +121,11 @@ public class MaskSpawner extends Module {
         }
     }
 
+    /**
+     * Helper method to determine if player is standing on the "mat"
+     *
+     * @return true or false if player is on the mat.
+     */
     private boolean isPlayerInBox() {
         if (mc.player == null) return false;
         Vec3d position = mc.player.getPos();
