@@ -12,6 +12,7 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
@@ -58,7 +59,7 @@ public class MaskSpawner extends Module {
             int delay = spwnr.getLogic().spawnDelay;
             ChatUtils.sendMsg(Text.of("Spawner delay: " + delay));
 
-            if (rotationLock.get()) {
+            if (rotationLock.get() && isPlayerInBox()) {
                 mc.player.setYaw(0);
                 mc.player.headYaw = 0;
                 mc.player.bodyYaw = 0;
@@ -111,7 +112,7 @@ public class MaskSpawner extends Module {
      * Helper method to calculate distance.
      *
      * @param spawner the spawner
-     * @return distance double
+     * @return the distance as a double
      */
     private double distance2Player(MobSpawnerBlockEntity spawner) {
         if (mc.player != null) {
@@ -119,6 +120,12 @@ public class MaskSpawner extends Module {
         } else {
             return 0.0;
         }
+    }
+
+    private boolean isPlayerInBox() {
+        if (mc.player == null) return false;
+        Vec3d position = mc.player.getPos();
+        return (position.getX() > spwnr.getPos().getX()) && (position.getX() < (spwnr.getPos().getX() + 1));
     }
 
     //rendering
@@ -139,7 +146,7 @@ public class MaskSpawner extends Module {
         render(new Box(new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1.1, spwnr.getPos().getZ() - 15.4),
                 new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
 
-        //blue face screen
+        //blue face shield
         if (faceShield.get()) {
             render(new Box(new Vec3d(spwnr.getPos().getX() + 1, spwnr.getPos().getY() + 1, spwnr.getPos().getZ() - 15.4),
                     new Vec3d(spwnr.getPos().getX(), spwnr.getPos().getY() - 1, spwnr.getPos().getZ() - 15.35)), sideColor3.get(), lineColor3.get(), shapeMode.get(), event);
