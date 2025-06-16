@@ -27,4 +27,4 @@ Video Guide (outdated but still gives the general idea): https://youtu.be/Ok1qjz
 
 Troll video: https://www.youtube.com/watch?v=vQkeRHzmp5Y&t=1s
 
-Outlast discord: https://discord.gg/yodiegang
+Outlast discord: https://discord.gg/aeuf8jAahb
