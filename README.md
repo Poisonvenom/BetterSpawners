@@ -1,3 +1,5 @@
+THE SPAWNER DELAY EXPLOIT HAS BEEN PATCHED ON 2B2T. THIS REPO WILL NO LONGER BE MAINTAINED.
+
 BetterSpawners is an Meteor client addon that bypasses spawner detection exploits by making the spawner appear natural.
 This mod includes three modules: ActivatedSpawnerDetector, CaveDisturbanceDetector, and SpawnerMask.
 The ActivatedSpawnerDetector and CaveDisturbanceDetector modules are included for convenience as the three modules are often used together. ActivatedSpawnerDetector and CaveDisturbanceDetector were created by Etianl and I claim no credit. Special thanks to Nigerianprince and NewHag.
